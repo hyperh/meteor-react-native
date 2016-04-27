@@ -1,5 +1,6 @@
 import DDPClient from 'ddp-client';
 import { AsyncStorage } from 'react-native';
+import hash from 'hash.js';
 
 let ddpClient = new DDPClient({host: '192.168.1.101'});
 
