@@ -15,17 +15,18 @@ export default function () {
   Meteor.methods({
     'things.add'() {
       console.log('things.add');
-      // const userId = this.userId;
+      const userId = this.userId;
 
-      // if (!userId) {
-        // throw new Meteor.Error('things.add', 'Must be logged in to add things.');
-      // }
+      if (!userId) {
+        throw new Meteor.Error('things.add', 'Must be logged in to add things.');
+      }
 
       const count = Things.find().count();
 
       const id = Things.insert({
         text: `some text ${count}`,
         createdAt: new Date(),
+        userId
       });
 
       return id;
