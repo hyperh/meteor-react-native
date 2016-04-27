@@ -5,7 +5,7 @@ const Home = ({things, users}) => (
     Hello World
     <div>
       <h2>Things</h2>
-      {things.map(thing => <div>{thing._id} {thing.text} {thing.userId}</div>)}
+      {things.map(thing => <div>{thing._id} {thing.text} {thing.email}</div>)}
     </div>
     <div>
       <h2>Users</h2>

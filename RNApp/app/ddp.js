@@ -6,7 +6,8 @@ let ddpClient = new DDPClient({host: '192.168.1.101'});
 
 ddpClient.signUpWithEmail = (email, password, callback) => {
   const params = {
-    email, password,
+    email,
+    password: ddpClient.sha256(password),
   };
 
   return ddpClient.call('createUser', [ params ], callback);
@@ -30,9 +31,13 @@ ddpClient.onAuthResponse = (err, res) => {
 
 ddpClient.loginWithEmail = (email, password, callback) => {
   console.log('----ddpClient.loginWithEmail----');
+  const hashed = ddpClient.sha256(password);
+
+  console.log(hashed);
+
   let params = {
     user: { email },
-    password,
+    password: hashed,
   };
   return ddpClient.call('login', [ params ], callback);
 };
@@ -48,6 +53,13 @@ ddpClient.logout = callback => {
   .then(res => {
     ddpClient.call('logout', [], callback);
   });
+};
+
+ddpClient.sha256 = password => {
+  return {
+    digest: hash.sha256().update(password).digest('hex'),
+    algorithm: 'sha-256',
+  };
 };
 
 export default ddpClient;
