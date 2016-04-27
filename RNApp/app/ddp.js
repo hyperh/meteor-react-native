@@ -12,6 +12,9 @@ ddpClient.signUpWithEmail = (email, password, callback) => {
 };
 
 ddpClient.onAuthResponse = (err, res) => {
+  console.log('----onAuthResponse----');
+  console.log(err);
+  console.log(res);
   if (res) {
     let { id, token, tokenExpires } = res;
 
