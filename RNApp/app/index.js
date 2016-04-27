@@ -1,27 +1,26 @@
-import React, {  
+import React, {
   View,
   Text,
   StyleSheet
 } from 'react-native';
 
 import Button from './button';
-import DDPClient from 'ddp-client';  
-let ddpClient = new DDPClient({host: '192.168.1.101'});
+import ddpClient from './ddp';
 
-export default React.createClass({  
+export default React.createClass({
   getInitialState() {
     return {
       connected: false,
       things: {}
-    }
+    };
   },
 
   componentDidMount() {
     ddpClient.connect((err, wasReconnect) => {
       let connected = true;
-      if (err) connected = false;
+      if (err) { connected = false; }
 
-      this.setState({ connected: connected });
+      this.setState({ connected });
       this.makeSubscription();
       this.observeThings();
     });
@@ -29,7 +28,7 @@ export default React.createClass({
 
   makeSubscription() {
     console.log('makeSubscription');
-    ddpClient.subscribe("things", [], () => {
+    ddpClient.subscribe('things', [], () => {
       console.log('subscribe done!');
       console.log(ddpClient);
       this.setState({things: ddpClient.collections.things});
@@ -43,7 +42,7 @@ export default React.createClass({
       console.log(ddpClient);
       console.log(id);
       this.setState({things: ddpClient.collections.things});
-    }
+    };
     observer.changed = (id, oldFields, clearedFields, newFields) => {
       console.log('----observer.changed----');
       console.log(ddpClient);
@@ -52,14 +51,14 @@ export default React.createClass({
       console.log(clearedFields); // Fields removed by unset
       console.log(newFields);
       this.setState({things: ddpClient.collections.things});
-    }
+    };
     observer.removed = (id, oldValue) => {
       console.log('----observer.removed----');
       console.log(ddpClient);
       console.log(id);
       console.log(oldValue);
       this.setState({things: ddpClient.collections.things});
-    }
+    };
   },
 
   handleIncrement() {
@@ -92,7 +91,7 @@ export default React.createClass({
   }
 });
 
-const styles = StyleSheet.create({  
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
