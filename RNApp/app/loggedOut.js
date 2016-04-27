@@ -47,6 +47,10 @@ export default React.createClass({
   handleSignUp() {
     let { email, password } = this.state;
     ddpClient.signUpWithEmail(email, password, (err, res) => {
+      console.log('----signUpWithEmail----');
+      console.log(err);
+      console.log(res);
+
       ddpClient.onAuthResponse(err, res);
       if (res) {
         this.props.changedSignedIn(true);

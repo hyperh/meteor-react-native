@@ -20,7 +20,7 @@ export default React.createClass({
   },
 
   makeSubscription() {
-    console.log('makeSubscription');
+    console.log('----makeSubscription----');
     ddpClient.subscribe('things', [], () => {
       console.log('subscribe done!');
       console.log(ddpClient);
@@ -55,29 +55,29 @@ export default React.createClass({
   },
 
   handleIncrement() {
-    console.log('inc');
+    console.log('----inc----');
     ddpClient.call('things.add');
   },
 
   handleDecrement() {
-    console.log('dec');
+    console.log('----dec----');
     ddpClient.call('things.remove');
   },
 
   handleUpdate() {
-    console.log('update');
+    console.log('----update----');
     ddpClient.call('things.update');
   },
 
   handleSignOut() {
-    console.log('handleSignOut');
+    console.log('----handleSignOut----');
     ddpClient.logout(() => {
       this.props.changedSignedIn(false);
     });
   },
 
   render() {
-    let count = Object.keys(this.state.things).length;
+    let count = this.state.things ? Object.keys(this.state.things).length : 0;
     return (
       <View>
         <Text>Posts: {count}</Text>

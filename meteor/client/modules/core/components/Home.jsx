@@ -9,7 +9,7 @@ const Home = ({things, users}) => (
     </div>
     <div>
       <h2>Users</h2>
-      {users.map(user => <div>{user._id} {user.username}</div>)}
+      {users.map(user => <div>{user._id} {user.username} {user.emails[0].address}</div>)}
     </div>
   </div>
 );

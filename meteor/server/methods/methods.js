@@ -22,11 +22,13 @@ export default function () {
       }
 
       const count = Things.find().count();
+      const email = Meteor.users.findOne(userId).emails[0].address;
 
       const id = Things.insert({
-        text: `some text ${count}`,
+        text: `some text ${count + 1}`,
         createdAt: new Date(),
-        userId
+        userId,
+        email,
       });
 
       return id;

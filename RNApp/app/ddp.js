@@ -25,6 +25,7 @@ ddpClient.onAuthResponse = (err, res) => {
 };
 
 ddpClient.loginWithEmail = (email, password, callback) => {
+  console.log('----ddpClient.loginWithEmail----');
   let params = {
     user: { email },
     password,
@@ -38,7 +39,7 @@ ddpClient.loginWithToken = (loginToken, callback) => {
 };
 
 ddpClient.logout = callback => {
-  console.log('ddpClient.logout');
+  console.log('----ddpClient.logout----');
   AsyncStorage.multiRemove([ 'userId', 'loginToken', 'loginTokenExpires' ])
   .then(res => {
     ddpClient.call('logout', [], callback);
